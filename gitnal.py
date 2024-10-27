@@ -39,7 +39,7 @@ def is_git_repo():
         return False
 
 # Function to check if a repository exists
-def check_repository_exists(username, token, repo_name="gitnal_code"):
+def check_repository_exists(username, token, repo_name="gitnal"):
     url = f"https://api.github.com/repos/{username}/{repo_name}"
     response = requests.get(url, auth=HTTPBasicAuth(username, token))
     if response.status_code == 200:
@@ -52,7 +52,7 @@ def check_repository_exists(username, token, repo_name="gitnal_code"):
         return False, f"Error: {response.status_code} - {response.json().get('message', '')}"
 
 
-def create_private_repository(username, token, repo_name="gitnal_code"):
+def create_private_repository(username, token, repo_name="gitnal"):
     # GitHub API URL for repository creation
     url = "https://api.github.com/user/repos"
     payload = {
@@ -117,7 +117,7 @@ def create_private_repository(username, token, repo_name="gitnal_code"):
 def on_submit():
     username = username_entry.get()
     token = token_entry.get()
-    repo_name = "gitnal_code"
+    repo_name = "gitnal"
 
     if not username or not token:
         #messagebox.showwarning("Input Required", "Please enter both username and token.")
@@ -143,7 +143,7 @@ def on_submit():
     
 
 # Call `fetch_journal_entries` after updating the status
-def update_status_panel(username, token, repo_name="gitnal_code"):
+def update_status_panel(username, token, repo_name="gitnal"):
     exists, message = check_repository_exists(username, token, repo_name)
     if exists:
         status_label.config(text="Connected", fg="green")
